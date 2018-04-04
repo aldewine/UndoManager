@@ -1,0 +1,15 @@
+The UndoManager is a small, self-contained example sub-system. You can 
+use any IDE if you like, you can find the sources in the "src" directory. 
+
+It consists of a couple of interfaces that all play together to fulfill 
+the task of tracking, undoing and redoing changes to some text document. 
+You can think of it as a sub-system of a text editor.
+
+The task is to understand the interfaces and what role they play in the
+UndoManager context and then, based on this understanding, write
+implementations of ONLY the UndoManager and UndoManagerFactory interfaces.
+
+What methods do you know to ensure that the code actually does what it
+is supposed to do? Apply them!
+
+Please send the implementation of the classes, including any tests, back by email.
