@@ -11,12 +11,12 @@ import java.nio.file.Paths;
 public class Document implements undo.com.undo.interfaces.Document {
 
     private byte[] file;
+    private int position;
 
     public Document(String strPath) throws IOException {
         Path path = Paths.get(strPath);
         file = Files.readAllBytes(path);
-
-        System.out.println("file has been read. size:" + file.length);
+        position = 0;
     }
 
     @Override
@@ -31,21 +31,36 @@ public class Document implements undo.com.undo.interfaces.Document {
         if(s.equals(readStr)){
             //since this is a delete operation move bytes by string length
             file = UtilFunc.moveBytesLeft(file, pos, s.length());
+        }else{
+            throw new IllegalStateException("the document doesn't have " + s + " as " + pos + ".");
         }
 
         byte[] result = new byte[file.length];
         System.arraycopy(file, 0, result, 0, file.length);
-        readStr = new String(result, StandardCharsets.UTF_8);
-        System.out.println("delete operation is finished! result:" + readStr);
     }
 
     @Override
     public void insert(int pos, String s) {
-        
+        if(pos > file.length){
+            throw new IllegalStateException(pos + " is an illegal position.");
+        }
+        file = UtilFunc.insertBytes(file, pos, s);
     }
 
     @Override
     public void setDot(int pos) {
+        if(pos > file.length){
+            throw new IllegalStateException(pos + " is an illegal position.");
+        }
+        this.position = pos;
+    }
 
+    public byte[] getFile() {
+        return file;
+    }
+
+    public String getAsString(){
+        String readStr = new String(file, StandardCharsets.UTF_8);
+        return readStr;
     }
 }

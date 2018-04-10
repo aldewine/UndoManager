@@ -34,4 +34,8 @@ public interface Document {
 	 * 			(that is, if document is shorter than that). 
 	 */
 	void setDot(int pos);
+
+	byte[] getFile();
+
+	String getAsString();
 }

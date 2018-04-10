@@ -24,5 +24,4 @@ public interface Change {
 	 * 			(that is if the document refuses the reversion of the change). 
 	 */
 	void revert(Document doc);
-
 }
